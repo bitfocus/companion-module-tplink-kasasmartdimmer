@@ -28,6 +28,8 @@ instance.prototype.DIMMERINFO = {
 instance.prototype.BRIGHTNESS_INTERVAL = null; //used for brightness up/down actions
 instance.prototype.CURRENT_BRIGHTNESS = 50;
 
+instance.prototype.DEVICE = null;
+
 // #########################
 // #### Other Functions ####
 // #########################
@@ -37,8 +39,12 @@ instance.prototype.getInformation = function () {
 
 	if (self.config.host) {
 		try {
-			let client = new Client();
-			let dimmerswitch = client.getDevice({ host: self.config.host })
+			if (!self.DEVICE) {
+				let client = new Client();
+				self.DEVICE = client.getDevice({ host: self.config.host });
+			}
+			
+			self.DEVICE
 			.then((device) => {
 				device.getSysInfo()
 				.then((info) => {
@@ -336,8 +342,12 @@ instance.prototype.power = function(powerState) {
 
 	if (self.config.host) {
 		try {
-			let client = new Client();
-			let dimmerswitch = client.getDevice({ host: self.config.host })
+			if (!self.DEVICE) {
+				let client = new Client();
+				self.DEVICE = client.getDevice({ host: self.config.host });
+			}
+			
+			self.DEVICE
 			.then((device) => {
 				self.log('info', 'Setting Dimmer Power to: ' + powerState);
 				device.setPowerState(powerState);
@@ -354,8 +364,12 @@ instance.prototype.powerToggle = function() {
 
 	if (self.config.host) {
 		try {
-			let client = new Client();
-			let dimmerswitch = client.getDevice({ host: self.config.host })
+			if (!self.DEVICE) {
+				let client = new Client();
+				self.DEVICE = client.getDevice({ host: self.config.host });
+			}
+			
+			self.DEVICE
 			.then((device) => {
 				self.log('info', 'Toggling Dimmer Switch');
 				device.togglePowerState();
@@ -372,8 +386,12 @@ instance.prototype.setBrightness = function(brightness) {
 
 	if (self.config.host) {
 		try {
-			let client = new Client();
-			let dimmerswitch = client.getDevice({ host: self.config.host })
+			if (!self.DEVICE) {
+				let client = new Client();
+				self.DEVICE = client.getDevice({ host: self.config.host });
+			}
+			
+			self.DEVICE
 			.then((device) => {
 				self.log('info', 'Setting Dimmer Brightness to: ' + brightness);
 				device.dimmer.setBrightness(brightness);
@@ -393,8 +411,12 @@ instance.prototype.setAlias = function(newName) {
 			if (self.config.alias !== '') {
 				self.log('info', 'Setting Dimmer Switch Alias to: ' + newName);
 
-				let client = new Client();
-				let dimmerswitch = client.getDevice({ host: self.config.host })
+				if (!self.DEVICE) {
+					let client = new Client();
+					self.DEVICE = client.getDevice({ host: self.config.host });
+				}
+				
+				self.DEVICE
 				.then((device) => {
 					device.setAlias(newName);
 				});
