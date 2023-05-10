@@ -2,85 +2,89 @@ module.exports = {
 	// ##########################
 	// #### Define Variables ####
 	// ##########################
-	setVariables: function (i) {
-		let self = i;
+	initVariables: function () {
+		let self = this;
 		let variables = [];
 
-		variables.push({ name: 'sw_ver', label: 'SW Version' });
-		variables.push({ name: 'hw_ver', label: 'HW Version' });
-		variables.push({ name: 'model', label: 'Model' });
-		variables.push({ name: 'device_id', label: 'Device ID' });
-		variables.push({ name: 'oem_id', label: 'OEM ID' });
-		variables.push({ name: 'hw_id', label: 'HW ID' });
-		variables.push({ name: 'rssi', label: 'RSSI' });
-		variables.push({ name: 'latitude', label: 'Latitude' });
-		variables.push({ name: 'longitude', label: 'Longitude' });
-		variables.push({ name: 'alias', label: 'Alias' });
-		variables.push({ name: 'mac_address', label: 'MAC Address' });
-		variables.push({ name: 'power_state', label: 'Power State' });
-		variables.push({ name: 'brightness', label: 'Brightness Level' });
+		variables.push({ variableId: 'sw_ver', name: 'SW Version' });
+		variables.push({ variableId: 'hw_ver', name: 'HW Version' });
+		variables.push({ variableId: 'model', name: 'Model' });
+		variables.push({ variableId: 'device_id', name: 'Device ID' });
+		variables.push({ variableId: 'oem_id', name: 'OEM ID' });
+		variables.push({ variableId: 'hw_id', name: 'HW ID' });
+		variables.push({ variableId: 'rssi', name: 'RSSI' });
+		variables.push({ variableId: 'latitude', name: 'Latitude' });
+		variables.push({ variableId: 'longitude', name: 'Longitude' });
+		variables.push({ variableId: 'alias', name: 'Alias' });
+		variables.push({ variableId: 'mac_address', name: 'MAC Address' });
+		variables.push({ variableId: 'power_state', name: 'Power State' });
+		variables.push({ variableId: 'brightness', name: 'Brightness Level' });
 
-		return variables;
+		self.setVariableDefinitions(variables);
 	},
 
 	// #########################
 	// #### Check Variables ####
 	// #########################
-	checkVariables: function (i) {
-		let self = i;
+	checkVariables: function () {
+		let self = this;
+
+		let variableObj = {};
 
 		try {
 			if ('sw_ver' in self.DIMMERINFO) {
-				self.setVariable('sw_ver', self.DIMMERINFO.sw_ver);
+				variableObj['sw_ver'] = self.DIMMERINFO.sw_ver;
 			}
 
 			if ('hw_ver' in self.DIMMERINFO) {
-				self.setVariable('hw_ver', self.DIMMERINFO.hw_ver);
+				variableObj['hw_ver'] = self.DIMMERINFO.hw_ver;
 			}
 
 			if ('model' in self.DIMMERINFO) {
-				self.setVariable('model', self.DIMMERINFO.model);
+				variableObj['model'] = self.DIMMERINFO.model;
 			}
 
 			if ('deviceId' in self.DIMMERINFO) {
-				self.setVariable('device_id', self.DIMMERINFO.deviceId);
+				variableObj['device_id'] = self.DIMMERINFO.deviceId;
 			}
 
 			if ('oemId' in self.DIMMERINFO) {
-				self.setVariable('oem_id', self.DIMMERINFO.oemId);
+				variableObj['oem_id'] = self.DIMMERINFO.oemId;
 			}
 
 			if ('hwId' in self.DIMMERINFO) {
-				self.setVariable('hw_id', self.DIMMERINFO.hwId);
+				variableObj['hw_id'] = self.DIMMERINFO.hwId;
 			}
 
 			if ('rssi' in self.DIMMERINFO) {
-				self.setVariable('rssi', self.DIMMERINFO.rssi);
+				variableObj['rssi'] = self.DIMMERINFO.rssi;
 			}
 
 			if ('latitude_i' in self.DIMMERINFO) {
-				self.setVariable('latitude', self.DIMMERINFO.latitude_i);
+				variableObj['latitude'] = self.DIMMERINFO.latitude_i;
 			}
 
 			if ('longitude_i' in self.DIMMERINFO) {
-				self.setVariable('longitude', self.DIMMERINFO.longitude_i);
+				variableObj['longitude'] = self.DIMMERINFO.longitude_i;
 			}
 
 			if ('alias' in self.DIMMERINFO) {
-				self.setVariable('alias', self.DIMMERINFO.alias);
+				variableObj['alias'] = self.DIMMERINFO.alias;
 			}
 
 			if ('mac' in self.DIMMERINFO) {
-				self.setVariable('mac_address', self.DIMMERINFO.mac);
+				variableObj['mac_address'] = self.DIMMERINFO.mac;
 			}
 
 			if ('relay_state' in self.DIMMERINFO) {
-				self.setVariable('power_state', (self.DIMMERINFO.relay_state === 1) ? 'On' : 'Off');
+				variableObj['power_state'] = (self.DIMMERINFO.relay_state === 1) ? 'On' : 'Off';
 			}
 
 			if ('brightness' in self.DIMMERINFO) {
-				self.setVariable('brightness', self.DIMMERINFO.brightness);
+				variableObj['brightness'] = self.DIMMERINFO.brightness;
 			}
+
+			self.setVariableValues(variableObj);
 		}
 		catch(error) {
 			if (String(error).indexOf('Cannot use \'in\' operator to search') === -1) {

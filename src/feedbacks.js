@@ -1,13 +1,15 @@
+const { combineRgb } = require('@companion-module/base')
+
 module.exports = {
 	// ##########################
 	// #### Define Feedbacks ####
 	// ##########################
-	setFeedbacks: function (i) {
-		let self = i;
+	initFeedbacks: function () {
+		let self = this;
 		let feedbacks = {};
 
-		const foregroundColor = self.rgb(255, 255, 255); // White
-		const backgroundColorRed = self.rgb(255, 0, 0); // Red
+		const foregroundColor = combineRgb(255, 255, 255); // White
+		const backgroundColorRed = combineRgb(255, 0, 0); // Red
 
 		feedbacks.powerState = {
 			type: 'boolean',
@@ -39,6 +41,6 @@ module.exports = {
 			}
 		};
 
-		return feedbacks;
+		self.setFeedbackDefinitions(feedbacks);
 	}
 }

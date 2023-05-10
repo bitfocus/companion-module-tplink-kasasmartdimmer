@@ -2,8 +2,8 @@ module.exports = {
 	// ##########################
 	// #### Instance Actions ####
 	// ##########################
-	setActions: function (i) {
-		let self = i;
+	initActions: function () {
+		let self = this;
 		let actions = {};
 
 		// ########################
@@ -11,22 +11,25 @@ module.exports = {
 		// ########################
 
 		actions.powerOn = {
-			label: 'Power On',
-			callback: function (action, bank) {
+			name: 'Power On',
+			options: [],
+			callback: function (action) {
 				self.power(true);
 			}
 		}
 
 		actions.powerOff = {
-			label: 'Power Off',
-			callback: function (action, bank) {
+			name: 'Power Off',
+			options: [],
+			callback: function (action) {
 				self.power(false);
 			}
 		}
 
 		actions.powerToggle = {
-			label: 'Power Toggle',
-			callback: function (action, bank) {
+			name: 'Power Toggle',
+			options: [],
+			callback: function (action) {
 				self.powerToggle();
 			}
 		}
@@ -36,7 +39,7 @@ module.exports = {
 		// ############################
 
 		actions.brightness = {
-			label: 'Set Brightness',
+			name: 'Set Brightness',
 			options: [
 				{
 					type: 'number',
@@ -51,13 +54,13 @@ module.exports = {
 					range: true
 				}
 			],
-			callback: function (action, bank) {
+			callback: function (action) {
 				self.setBrightness(action.options.brightness);
 			}
 		}
 
 		actions.brightnessUp = {
-			label: 'Brightness Up Continuously',
+			name: 'Brightness Up Continuously',
 			options: [
 				{
 					type: 'textinput',
@@ -67,7 +70,7 @@ module.exports = {
 					tooltip: 'The amount of time in milliseconds'
 				}
 			],
-			callback: function (action, bank) {
+			callback: function (action) {
 				let rate = action.options.rate;
 				self.parseVariables(rate, function (value) {
 					rate = value;
@@ -79,14 +82,15 @@ module.exports = {
 		}
 
 		actions.brightnessUpStop = {
-			label: 'Brightness Up Stop',
-			callback: function (action, bank) {
+			name: 'Brightness Up Stop',
+			options: [],
+			callback: function (action) {
 				self.brightness_fader('up', 'stop', null);
 			}
 		}
 
 		actions.brightnessDown = {
-			label: 'Brightness Down Continuously',
+			name: 'Brightness Down Continuously',
 			options: [
 				{
 					type: 'textinput',
@@ -96,7 +100,7 @@ module.exports = {
 					tooltip: 'The amount of time in milliseconds'
 				}
 			],
-			callback: function (action, bank) {
+			callback: function (action) {
 				let rate = action.options.rate;
 				self.parseVariables(rate, function (value) {
 					rate = value;
@@ -108,12 +112,13 @@ module.exports = {
 		}
 
 		actions.brightnessDownStop = {
-			label: 'Brightness Down Stop',
-			callback: function (action, bank) {
+			name: 'Brightness Down Stop',
+			options: [],
+			callback: function (action) {
 				self.brightness_fader('down', 'stop', null);
 			}
 		}
 
-		return actions
+		self.setActionDefinitions(actions);
 	}
 }
