@@ -69,8 +69,10 @@ module.exports = {
 		}
 	},
 	
-	setAlias: function(newName) {
+	setAlias: function() {
 		let self = this;
+
+		let newName = self.config.alias;
 	
 		if (self.config.host) {
 			try {
@@ -112,7 +114,7 @@ module.exports = {
 						self.DIMMERINFO = info;
 		
 						if (self.DIMMERINFO) {
-							self.updateStatus(InstanceStatus.OK);
+							self.updateStatus(InstanceStatus.Ok);
 		
 							try {
 								self.updateData();

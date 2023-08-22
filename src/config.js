@@ -32,7 +32,7 @@ module.exports = {
 				width: 4
 			},
 			{
-				type: 'text',
+				type: 'static-text',
 				id: 'intervalInfo',
 				width: 12,
 				label: 'Update Interval',

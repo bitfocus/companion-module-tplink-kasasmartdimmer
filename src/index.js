@@ -67,7 +67,7 @@ class kasadimmerInstance extends InstanceBase {
 			brightness: null
 		};
 	
-		this.updateStatus(InstanceStatus.Connecting);
+		//this.updateStatus(InstanceStatus.Connecting);
 		this.setAlias();
 		this.getInformation();
 		this.setupInterval();

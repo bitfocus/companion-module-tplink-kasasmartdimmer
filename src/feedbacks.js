@@ -13,9 +13,9 @@ module.exports = {
 
 		feedbacks.powerState = {
 			type: 'boolean',
-			label: 'Power State',
+			name: 'Power State',
 			description: 'Indicate if Switch is On or Off',
-			style: {
+			defaultStyle: {
 				color: foregroundColor,
 				bgcolor: backgroundColorRed,
 			},
