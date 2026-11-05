@@ -11,10 +11,10 @@
 		"url": "git+https://github.com/bitfocus/companion-module-tplink-kasasmartdimmer.git"
 	},
 	"dependencies": {
-		"@companion-module/base": "~1.4.1",
+		"@companion-module/base": "~1.15.1",
 		"tplink-smarthome-api": "^4.2.0"
 	},
 	"devDependencies": {
-		"@companion-module/tools": "^2.8.0"
+		"@companion-module/tools": "^2.9.1"
 	}
 }
